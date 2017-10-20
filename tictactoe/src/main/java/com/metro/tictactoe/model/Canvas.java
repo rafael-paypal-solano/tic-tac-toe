@@ -1,13 +1,11 @@
 package com.metro.tictactoe.model;
 
-import java.io.Serializable;
-
 /**
  * <p>TicTacToe canvas.</p>
  * @author rsolano
  *
  */
-public class Canvas implements Serializable {
+public class Canvas implements CanvasState {
 
 	/**
 	 * <code>3</code>
@@ -29,6 +27,11 @@ public class Canvas implements Serializable {
 	int size;
 	
 	/**
+	 * How many cells where filled in previous moves.
+	 */
+	int count;
+	
+	/**
 	 * <p>This is a <b><code>size * size</code></b> vector representing the game state.</p>
 	 */
 	Player[] players;
@@ -45,6 +48,7 @@ public class Canvas implements Serializable {
 	 */
 	public Canvas(int size) {
 		this.players = new Player[size * size];		
+		this.size = size;
 	}
 	
 	/**
@@ -67,9 +71,28 @@ public class Canvas implements Serializable {
 	public boolean setPlayer(int row, int col, Player player) {
 		if(getPlayer(row, col) == null) {
 			players[row * size + col] = player;
+			count ++;
 			return true;
 		}
 		
 		return false;
 	}
+	
+	/**
+	 * 
+	 * @return How many cells where filled in previous moves.
+	 */
+	public int getCount() {
+		return count;
+	}
+	
+	/**
+	 * 
+	 * @return Horiz/vert dimensions. Since the canvas is a square matrix, we only need to store a single int.
+	 */
+	public int getSize() {
+		return size;
+	}
+	
+	
 }
