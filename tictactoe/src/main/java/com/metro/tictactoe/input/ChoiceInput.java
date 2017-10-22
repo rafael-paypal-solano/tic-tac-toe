@@ -23,6 +23,7 @@ public abstract class ChoiceInput {
 	 * @param player The player who makes the choices.
 	 */
 	public ChoiceInput(Player player) {
+		
 		this.player = player;
 	}
 	
@@ -32,5 +33,15 @@ public abstract class ChoiceInput {
 	 * @throws IOException 
 	 */
 	public abstract Choice read() throws IOException;
+
+	/**
+	 * 
+	 * @return The player who makes the choices.
+	 */
+	public Player getPlayer() {
+		return player;
+	}
+	
+	
 	
 }

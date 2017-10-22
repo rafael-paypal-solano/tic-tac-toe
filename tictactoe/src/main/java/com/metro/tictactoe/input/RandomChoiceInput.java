@@ -1,36 +1,69 @@
 package com.metro.tictactoe.input;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
-import com.metro.tictactoe.model.CanvasState;
+import com.metro.tictactoe.GameState;
 import com.metro.tictactoe.model.Choice;
 import com.metro.tictactoe.model.Player;
 
-public class RandomChoiceInput extends ChoiceInput{
+/**
+ * <p>This class represents a stream of randomly generated choices.</p>
+ * @author rsolano
+ *
+ */
+public class RandomChoiceInput extends ChoiceInput {
 
-	CanvasState canvas;
-	int size;
+	/**
+	 * Current game's state.
+	 */
+	GameState state;
 	
-	public RandomChoiceInput(Player player, CanvasState canvas) {
+	
+	/**
+	 * &quot;What's your choice %s ?&quot;
+	 */
+	private static final String PROMPT_TEMPLATE="%s (aka 'the computer') made this random choice : ";
+	
+	
+	/**
+	 * Text writer used for feedback. 
+	 */
+	private PrintWriter printer;
+	
+	/**
+	 * 
+	 * @param player The player who makes the choices (usually the computer).
+	 * @param state Current game's state.
+	 * @param printer Text writer used for feedback.
+	 */	
+	public RandomChoiceInput(Player player, GameState state, PrintWriter printer) {
+		
 		super(player);
-		this.canvas = canvas;
-		this.size = canvas.getSize() * canvas.getSize();
+		this.state = state;
+		this.printer = printer;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public Choice read() throws IOException {
-		if(canvas.getCount() < this.size) {
-			int row = (int)(Math.random() * 100);
-			int col = (int)(Math.random() * 100);
+		
+		int row = (int)(Math.random() * 100);
+		int col = (int)(Math.random() * 100);
+		
+		printer.println(String.format(PROMPT_TEMPLATE, player.getName()));
+		printer.flush();
+		
+		while(state.getPlayer(row, col) == null) {
 			
-			while(canvas.getPlayer(row, col) != null) {
-				row = (int)(Math.random() * 100);
-				col = (int)(Math.random() * 100);
-				
-				return new Choice(row, col, this.player);
-			}
+			row = (int)(Math.random() * 100);
+			col = (int)(Math.random() * 100);		
 		}
-		return null;
+		
+		Choice choice = new Choice(row, col, player);
+		return choice;		
 	}
 
 }

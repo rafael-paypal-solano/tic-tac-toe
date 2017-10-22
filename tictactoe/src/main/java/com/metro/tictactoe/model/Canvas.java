@@ -1,25 +1,15 @@
 package com.metro.tictactoe.model;
 
+import com.metro.tictactoe.GameState;
+
 /**
  * <p>TicTacToe canvas.</p>
  * @author rsolano
  *
  */
-public class Canvas implements CanvasState {
+public class Canvas implements GameState {
 
-	/**
-	 * <code>3</code>
-	 */
-	public static final int MIN_SIZE=3;
 	
-	/**
-	 * <code>10</code>
-	 */
-	public static final int MAX_SIZE=10;
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -5162712967506426878L;
 
 	/**
 	 * Horiz/vert dimensions. Since the canvas is a square matrix, we only need to store a single <code>int</code>. 
