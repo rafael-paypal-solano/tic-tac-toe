@@ -1,8 +1,13 @@
-package com.metro.tictactoe.model;
+package com.metro.tictactoe;
 
-import java.io.Serializable;
+import com.metro.tictactoe.model.Player;
 
-public interface CanvasState extends Serializable {
+/**
+ * <p>This class represent current game's state.</p>
+ * @author rsolano
+ *
+ */
+public interface GameState {
 	/**
 	 * <p>Retrieves the <code>com.metro.tictactoe.model.Player</code> reference stored in a cell.</p>
 	 * @param row Cell's vertical coordinate.
@@ -10,6 +15,7 @@ public interface CanvasState extends Serializable {
 	 * @return The <code>com.metro.tictactoe.model.Player</code> stored in the cell identified by <code>row</code> and <code>col</code>.
 	 */
 	public Player getPlayer(int row, int col);
+	
 	
 	/**
 	 * 
@@ -22,4 +28,5 @@ public interface CanvasState extends Serializable {
 	 * @return Horiz/vert dimensions. Since the canvas is a square matrix, we only need to store a single int.
 	 */
 	public int getSize();
+		
 }
