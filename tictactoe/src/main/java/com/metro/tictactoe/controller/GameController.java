@@ -3,7 +3,6 @@ package com.metro.tictactoe.controller;
 import com.metro.tictactoe.GameException;
 import com.metro.tictactoe.GameState;
 import com.metro.tictactoe.model.Canvas;
-import com.metro.tictactoe.model.Choice;
 
 /**
  * <p>This class implements state management and game logic.</p>
@@ -56,4 +55,10 @@ public class GameController {
 		return canvas;
 	}
 	
+	/**
+	 * @return Returns <code>false</code> when game is over. 
+	 */	
+	public boolean gameOver() {
+		return false;
+	}
 }

@@ -1,4 +1,4 @@
-package com.metro.tictactoe.view;
+package com.metro.tictactoe.view.console;
 
 
 import com.metro.tictactoe.GameException;
@@ -18,8 +18,20 @@ public class ConsoleView {
 		this.inputs = inputs;
 		this.controller = controller;
 	}
-	public void start() {
+	
+	public boolean gameOver() {
 		
+		return false;
+	}
+	
+	public void displayState() {
+		
+	}
+	
+	public void start() {
+		while(! gameOver()) {
+			
+		}
 	}
 	
 
