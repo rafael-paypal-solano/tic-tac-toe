@@ -1,8 +1,11 @@
 package com.metro.tictactoe.view;
 
+import java.io.IOException;
+
 import com.metro.tictactoe.GameException;
 import com.metro.tictactoe.controller.GameController;
 import com.metro.tictactoe.input.ChoiceInput;
+import com.metro.tictactoe.model.Choice;
 
 /**
  * <p>This class contains the game's main loop.</p>
@@ -23,6 +26,11 @@ public abstract class GameView {
 	ChoiceInput[] inputs;
 	
 	/**
+	 * Choices collected by <code>getInput()</code> method.
+	 */
+	Choice[] choices;
+	
+	/**
 	 * <p>This constructor initializes fields whose names match parameters.</p>
 	 * @param inputs There is one <code>com.metro.tictactoe.input.ChoiceInput</code> instance per player
 	 * @param controller This controller manages game logic.
@@ -35,6 +43,7 @@ public abstract class GameView {
 	
 		this.inputs = inputs;
 		this.controller = controller;
+		this.choices = new Choice[inputs.length];
 	}
 	
 	/**
@@ -47,20 +56,33 @@ public abstract class GameView {
 	}
 	
 	/**
-	 * <p>Updates the UI view that depicts game's state.</p>
+	 * <p>Updates the UI view that shows game's state.</p>
+	 * <p>This method is abstract because we didn't want to prescribe a particular rendering interface.</p>
 	 */
 	public abstract void  displayState();
 
 	/**
-	 * Grabs input from players.
+	 * Collects input from players.
+	 * @throws GameException 
 	 */
-	public abstract void  getInput();
+	public void  getInput() throws GameException {
+		int i = 0;
+		try {
+			for(ChoiceInput input: inputs) {
+				i++;
+				choices[i] = input.read();
+			}
+		}catch(IOException e) {
+			throw new GameException(e);
+		}
+	}
 	
 	/**
 	 * <p>Starts the game logic</p>
 	 * <p>The internal loop runs in the curren thread</p>
+	 * @throws GameException 
 	 */
-	public void start() {
+	public void start() throws GameException {
 		while(! gameOver()) {
 			getInput();
 			displayState();

@@ -1,4 +1,4 @@
-package com.metro.tictactoe.view;
+package com.metro.tictactoe.view.console;
 
 import java.io.BufferedReader;
 import java.io.InputStream;

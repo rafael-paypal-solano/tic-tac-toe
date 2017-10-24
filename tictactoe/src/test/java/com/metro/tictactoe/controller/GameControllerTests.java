@@ -5,7 +5,7 @@ import org.junit.Test;
 import com.metro.tictactoe.GameException;
 import com.metro.tictactoe.controller.GameController;
 
-public class GameControllerTest {
+public class GameControllerTests {
 
 	@Test
 	public void testGoodInitialization() throws GameException {

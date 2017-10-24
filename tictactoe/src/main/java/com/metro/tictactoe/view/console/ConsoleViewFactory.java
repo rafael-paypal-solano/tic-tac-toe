@@ -100,7 +100,7 @@ public class ConsoleViewFactory {
 				new RandomChoiceInput(new Player(computer, "Bot Player"), controller.getState() , writer)
 			};
 
-			consoleView = new ConsoleView(inputs, controller);
+			consoleView = new ConsoleView(inputs, controller, writer);
 			
 		}catch (IOException e) {
 			
