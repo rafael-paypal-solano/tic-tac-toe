@@ -26,6 +26,35 @@ public class ConsoleView extends GameView{
 	PrintWriter writer;
 	
 	/**
+	 * <p>Helper function used by constructor to create the grid template.</p>
+	 * <p>Check constructor's code for details.</p>
+	 * @param space .-
+	 * @param separator .-
+	 * @param rows .-
+	 * @param cols .-
+	 * @param i .-
+	 * @param EXTRA  .-
+	 * @return .-
+	 */
+	private int fillRow(char space, char separator, int rows, int cols, int i, int EXTRA) {
+		int col;
+		char c;
+		int k;
+		
+		grid[i * cols + 0] = space;
+		grid[i * cols + 1] = space;
+		
+		for(k = 0; k < rows; k++) {
+					
+			col = k + EXTRA;
+			c = k % 2 == 0 ? space : separator;
+			grid[i * cols + col] = c;
+		}
+
+		return k;
+	}
+	
+	/**
 	 * 
 	 * @param inputs 
 	 * @param controller Controller that managesstate and game logic
@@ -42,44 +71,27 @@ public class ConsoleView extends GameView{
 		int cols = rows + lineSeparator.length + EXTRA + 1;	
 		char c;  
 		int col;
-		int k;
+		int k = 0;
 		
 		this.grid = new char[  rows * cols ];
 		this.writer = writer;
 		
 		for(int i = 0; i < rows; i++) {
 			
+			
 			if( i % 2 == 0) { 
-				
-				grid[i * cols + 0] = ' ';
-				grid[i * cols + 1] = ' ';
-				
-				for(k = 0; k < rows; k++) {
-							
-					col = k + EXTRA;
-					c = k % 2 == 0 ? ' ' : '│';
-					grid[i * cols + col] = c;
-				}
-				
-				
+			
+				k = fillRow(' ', '│', rows, cols, i, EXTRA);
 				
 			}else {
 				
-				grid[i * cols + 0] = '─';
-				grid[i * cols + 1] = '─';
-								
-				for(k = 0; k < rows; k++) {
-					
-					col = k + EXTRA;
-					c = k % 2 == 0 ? '─' : '┼';
-					grid[i * cols + col] = c;
-				}				
-				
+				k = fillRow('─', '┼', rows, cols, i, EXTRA);				
 				grid[i * cols + k + EXTRA] = '─';
 			}
 							
 			
 			k ++;
+			
 			for(int j = 0 ; j < lineSeparator.length; j++) {
 				
 				col = k + j + EXTRA;
