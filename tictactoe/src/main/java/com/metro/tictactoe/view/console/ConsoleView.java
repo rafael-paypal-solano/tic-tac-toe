@@ -35,9 +35,11 @@ public class ConsoleView extends GameView{
 	public ConsoleView(ChoiceInput[] inputs, GameController controller, PrintWriter writer) throws GameException {
 		super(inputs, controller);
 		
+		final int EXTRA = 2;
+		
 		char[] lineSeparator = System.lineSeparator().toCharArray();
 		int rows = 2 * controller.getState().getSize() + 1;
-		int cols = rows + lineSeparator.length + 2;	
+		int cols = rows + lineSeparator.length + EXTRA + 1;	
 		char c;  
 		int col;
 		int k;
@@ -54,7 +56,7 @@ public class ConsoleView extends GameView{
 				
 				for(k = 0; k < rows; k++) {
 							
-					col = k + 2;
+					col = k + EXTRA;
 					c = k % 2 == 0 ? ' ' : '│';
 					grid[i * cols + col] = c;
 				}
@@ -65,18 +67,22 @@ public class ConsoleView extends GameView{
 				
 				grid[i * cols + 0] = '─';
 				grid[i * cols + 1] = '─';
-				
+								
 				for(k = 0; k < rows; k++) {
 					
-					col = k + 2;
+					col = k + EXTRA;
 					c = k % 2 == 0 ? '─' : '┼';
 					grid[i * cols + col] = c;
 				}				
+				
+				grid[i * cols + k + EXTRA] = '─';
 			}
+							
 			
+			k ++;
 			for(int j = 0 ; j < lineSeparator.length; j++) {
 				
-				col = k + j + 2;
+				col = k + j + EXTRA;
 				grid[i * cols + col] = lineSeparator[j];
 			}
 		}
