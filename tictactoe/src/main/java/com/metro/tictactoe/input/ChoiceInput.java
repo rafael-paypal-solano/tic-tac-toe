@@ -4,6 +4,7 @@ import com.metro.tictactoe.model.Player;
 
 import java.io.IOException;
 
+import com.metro.tictactoe.GameState;
 import com.metro.tictactoe.model.Choice;
 
 /**
@@ -19,12 +20,19 @@ public abstract class ChoiceInput {
 	Player player;
 	
 	/**
-	 * 
-	 * @param player The player who makes the choices.
+	 * Current game's state.
 	 */
-	public ChoiceInput(Player player) {
+	GameState gameState;
+	
+	/**
+	 * 
+	 * @param player The player who makes the choices
+	 * @param gameState Current game's state.
+	 */
+	public ChoiceInput(Player player, GameState gameState) {
 		
 		this.player = player;
+		this.gameState = gameState;
 	}
 	
 	/**

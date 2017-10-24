@@ -95,8 +95,8 @@ public class ConsoleViewFactory {
 			GameController controller = new GameController(size);
 			
 			ChoiceInput[] inputs =  {
-				new ConsoleChoiceInput(new Player(human1, "Human Player 1"), reader, writer),
-				new ConsoleChoiceInput(new Player(human2, "Human Player 2"), reader, writer),
+				new ConsoleChoiceInput(new Player(human1, "Human Player 1"), controller.getState(), reader, writer),
+				new ConsoleChoiceInput(new Player(human2, "Human Player 2"), controller.getState(), reader, writer),
 				new RandomChoiceInput(new Player(computer, "Bot Player"), controller.getState() , writer)
 			};
 

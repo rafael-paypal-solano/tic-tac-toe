@@ -31,6 +31,11 @@ public abstract class GameView {
 	Choice[] choices;
 	
 	/**
+	 * Current player # [0...choice.length()] 
+	 */
+	int current;
+	
+	/**
 	 * <p>This constructor initializes fields whose names match parameters.</p>
 	 * @param inputs There is one <code>com.metro.tictactoe.input.ChoiceInput</code> instance per player
 	 * @param controller This controller manages game logic.
@@ -52,6 +57,7 @@ public abstract class GameView {
 	 * @return Returns <code>false</code> when game is over. 
 	 */
 	public boolean gameOver() {		
+		
 		return controller.gameOver();
 	}
 	
@@ -63,18 +69,15 @@ public abstract class GameView {
 
 	/**
 	 * Collects input from players.
+	 * @return The choice made by the last user who interacted with the game.. Each call may return a different value.
 	 * @throws GameException 
+	 * @throws IOException 
 	 */
-	public void  getInput() throws GameException {
-		int i = 0;
-		try {
-			for(ChoiceInput input: inputs) {
-				i++;
-				choices[i] = input.read();
-			}
-		}catch(IOException e) {
-			throw new GameException(e);
-		}
+	public Choice  getInput() throws GameException, IOException {
+		current = (current == choices.length ? 0  : current + 1);
+		
+		Choice choice = inputs[current].read();
+		return choice;
 	}
 	
 	/**
@@ -83,9 +86,16 @@ public abstract class GameView {
 	 * @throws GameException 
 	 */
 	public void start() throws GameException {
-		while(! gameOver()) {
-			getInput();
-			displayState();
+		try {
+			
+			while(! gameOver()) {
+				Choice choice = getInput();
+				
+				displayState();
+			}
+		} catch(IOException e) {
+			
+			throw new GameException(e);
 		}
 	}
 }

@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import com.metro.tictactoe.GameState;
 import com.metro.tictactoe.model.Choice;
 import com.metro.tictactoe.model.Player;
 
@@ -25,6 +26,11 @@ public class ConsoleChoiceInput extends ChoiceInput {
 	private static final String BAD_INPUT_MSG_TEMPLATE="Sorry, '%s' is not a valid choice!";
 	
 	/**
+	 * &quot;The cell at (%d,%d) is not empty.!&quot;
+	 */
+	private static final String NOTEMPTY_CELL_MSG_TEMPLATE="The cell at (%d,%d) is not empty.";
+	
+	/**
 	 * <code>java.io.BufferedReader</code> instance pointing to standard input.
 	 */
 	BufferedReader reader;
@@ -37,16 +43,22 @@ public class ConsoleChoiceInput extends ChoiceInput {
 	/**
 	 * 
 	 * @param player The player who makes the choices.
+	 * @param gameState Current game's state.
 	 * @param reader Input reader through which the player sends his choices.
 	 * @param writer Text writer used for feedback.
 	 */
-	public ConsoleChoiceInput(Player player, BufferedReader reader, PrintWriter writer) {
+	public ConsoleChoiceInput(Player player, GameState gameState, BufferedReader reader, PrintWriter writer) {
 		
-		super(player);
+		super(player, gameState);
 		this.reader = reader;
 		this.writer = writer;
 	}
 
+	private void println(String line) {
+		writer.println(String.format(PROMPT_TEMPLATE, player.getName()));
+		writer.flush();		
+	}
+	
 	/**
 	 * {@inheritDoc}
 	 */
@@ -55,12 +67,11 @@ public class ConsoleChoiceInput extends ChoiceInput {
 		
 		
 		Choice choice = null;
-		String line;
+		String line = String.valueOf(' ');
 		
-		while(choice == null) {
+		while(choice == null && line != null) {
 			
-			writer.println(String.format(PROMPT_TEMPLATE, player.getName()));
-			writer.flush();
+			println(String.format(PROMPT_TEMPLATE, player.getName()));			
 			line = reader.readLine();
 					
 			if(	(line != null) &&
@@ -71,13 +82,14 @@ public class ConsoleChoiceInput extends ChoiceInput {
 				String[]  coordinates = line.trim().split("\\s*,\\s*");
 				choice = new Choice(Integer.parseInt(coordinates[0]), Integer.parseInt(coordinates[1]), player);
 				
-			} else if (line == null){
-				
-				break;
-				
+				if(gameState.getPlayer(choice.getRow(), choice.getCol()) != null) {
+					
+					println(String.format(NOTEMPTY_CELL_MSG_TEMPLATE, choice.getRow(), choice.getCol()));
+					
+				}
 			} else {
 				
-				writer.println(BAD_INPUT_MSG_TEMPLATE);
+				println(BAD_INPUT_MSG_TEMPLATE);
 			}
 			
 		}

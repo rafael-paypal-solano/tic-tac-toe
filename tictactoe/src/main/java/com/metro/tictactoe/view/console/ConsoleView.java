@@ -64,13 +64,10 @@ public class ConsoleView extends GameView{
 	public ConsoleView(ChoiceInput[] inputs, GameController controller, PrintWriter writer) throws GameException {
 		super(inputs, controller);
 		
-		final int EXTRA = 2;
-		
+		final int EXTRA = 2;		
 		char[] lineSeparator = System.lineSeparator().toCharArray();
 		int rows = 2 * controller.getState().getSize() + 1;
 		int cols = rows + lineSeparator.length + EXTRA + 1;	
-		char c;  
-		int col;
 		int k = 0;
 		
 		this.grid = new char[  rows * cols ];
@@ -94,7 +91,7 @@ public class ConsoleView extends GameView{
 			
 			for(int j = 0 ; j < lineSeparator.length; j++) {
 				
-				col = k + j + EXTRA;
+				int col = k + j + EXTRA;
 				grid[i * cols + col] = lineSeparator[j];
 			}
 		}

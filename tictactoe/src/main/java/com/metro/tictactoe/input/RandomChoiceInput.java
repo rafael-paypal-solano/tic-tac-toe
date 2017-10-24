@@ -14,11 +14,6 @@ import com.metro.tictactoe.model.Player;
  */
 public class RandomChoiceInput extends ChoiceInput {
 
-	/**
-	 * Current game's state.
-	 */
-	GameState state;
-	
 	
 	/**
 	 * &quot;What's your choice %s ?&quot;
@@ -29,19 +24,18 @@ public class RandomChoiceInput extends ChoiceInput {
 	/**
 	 * Text writer used for feedback. 
 	 */
-	private PrintWriter printer;
+	private PrintWriter writer;
 	
 	/**
 	 * 
-	 * @param player The player who makes the choices (usually the computer).
-	 * @param state Current game's state.
-	 * @param printer Text writer used for feedback.
-	 */	
-	public RandomChoiceInput(Player player, GameState state, PrintWriter printer) {
+	 * @param player The player who makes the choices.
+	 * @param gameState Current game's state.
+	 * @param writer Text writer used for feedback.
+	 */
+	public RandomChoiceInput(Player player, GameState gameState, PrintWriter writer) {
 		
-		super(player);
-		this.state = state;
-		this.printer = printer;
+		super(player, gameState);
+		this.writer = writer;
 	}
 
 	/**
@@ -53,10 +47,10 @@ public class RandomChoiceInput extends ChoiceInput {
 		int row = (int)(Math.random() * 100);
 		int col = (int)(Math.random() * 100);
 		
-		printer.println(String.format(PROMPT_TEMPLATE, player.getName()));
-		printer.flush();
+		writer.println(String.format(PROMPT_TEMPLATE, player.getName()));
+		writer.flush();
 		
-		while(state.getPlayer(row, col) == null) {
+		while(gameState.getPlayer(row, col) == null) {
 			
 			row = (int)(Math.random() * 100);
 			col = (int)(Math.random() * 100);		
