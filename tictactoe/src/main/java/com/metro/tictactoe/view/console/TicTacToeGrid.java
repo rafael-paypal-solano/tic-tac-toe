@@ -20,41 +20,57 @@ public class TicTacToeGrid {
 	int size;
 	
 	/**
-	 * 
-	 * @param size Since this is a square grid, size indicate both rows and columns count.
-	 * @param 
+	 * @param size Since this is a square grid, size indicate both rows and columns count. This parameter must be in the [3,99] range.
+	 * @param width A positive integer greater than 3.
 	 */
 	public TicTacToeGrid(int size, int width) {
 		char[] lineSeparator = System.lineSeparator().toCharArray();
 		int rows = 2 * (size + 1);
-		int cols = (size + 1) * (width +  1) + lineSeparator.length;
+		int cols = (size + 1) * (width +  1) + lineSeparator.length + 1;
+		int n = 1;
 		
 		this.size = size;
 		this.grid = new char[  rows * cols ];
 		
 		
-		for(int row = 0; row < rows -1; row += 2) {
-			int i = row;
-			int j = row + 1;
+		for(int i = 0; i < rows -1; i += 2) {
+			int j = i + 1;
 			int k;
+			char c = i < (rows - 2) ? '┼': '┴';
 			
-			for(k = 0; k < (cols - lineSeparator.length) ; k++) {
+			for(k = 0; k < (cols - (lineSeparator.length + 1)) ; k++) {
 				
-				if(k > 0 && k % (width + 1) == 0) {					
+				if(k > 0 && k % (width + 1) == 0) {
+					
 					grid[i * cols + k] = '│';
-					grid[j * cols + k] = '┼';
+					grid[j * cols + k] = c;
 				}else {
+					
 					grid[i * cols + k] = ' ';
 					grid[j * cols + k] = '─';					
 				}
 			}
 			
+			if( i > 0 && i % 2 == 0) {
+				
+				if( n < 10) {
+				
+					grid[i * cols + 1] = (char)(n + 48);
+				} else {
+					
+					grid[i * cols + 1] = (char)(n / 10 + 48);
+					grid[i * cols + 0] = (char)((n - n / 10 ) + 48);
+				}
+				
+				n++;
+			}
 			
-			int p = 0;
+			grid[i * cols + k] = '│';
+			grid[j * cols + k] = i == rows -2 ? '┘' : '┤';
 			
-			while(p < lineSeparator.length) {
-				grid[i * cols + k + p] = lineSeparator[p];
-				grid[j * cols + k + p] = lineSeparator[p];
+			for(int p = 0 ;p < lineSeparator.length; p++ ) {
+				grid[i * cols + k + p + 1] = lineSeparator[p];
+				grid[j * cols + k + p + 1] = lineSeparator[p];
 				p++;
 			}
 			
