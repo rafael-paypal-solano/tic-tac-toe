@@ -10,7 +10,7 @@ import org.junit.Test;
 import com.metro.tictactoe.GameException;
 import com.metro.tictactoe.view.console.ConsoleViewFactory;
 
-public class ConsoleViewFactoryTests {
+public class ConsoleViewFactoryTest {
 
 	private void assertExceptionCode(InputStream input, int code) throws GameException {
 		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));

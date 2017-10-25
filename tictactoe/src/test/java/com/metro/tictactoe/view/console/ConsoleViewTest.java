@@ -10,7 +10,7 @@ import org.junit.Test;
 import com.metro.tictactoe.GameException;
 import com.metro.tictactoe.controller.GameController;
 
-public class ConsoleViewTests {
+public class ConsoleViewTest {
 
 	@Test
 	public void testDisplay() throws GameException {
