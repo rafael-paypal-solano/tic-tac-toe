@@ -23,6 +23,8 @@ public class TicTacToeGrid {
 	public static final int MAX_SIZE=10;
 
 	
+	final int width = 3;
+	
 	/**
 	 * Text buffer.  
 	 */
@@ -33,6 +35,9 @@ public class TicTacToeGrid {
 	 */
 	int size;
 	
+	int rows;
+	
+	int cols;
 	/**
 	 * @param size Since this is a square grid, size indicate both rows and columns count. This parameter must be in the [3,99] range.
 	 * @throws GameException 
@@ -41,16 +46,15 @@ public class TicTacToeGrid {
 		
 		if (size < MIN_SIZE || size > MAX_SIZE)
 			throw new GameException("Grid size if out of range.", -1);
-		
-		final int width = 3;
+				
 		char[] lineSeparator = System.lineSeparator().toCharArray();
-		int rows = 2 * (size + 1);
-		int cols = (size + 1) * (width +  1) + lineSeparator.length + 1;
 		int n = 1;
 		int pos = 2 * width;
 		
+		rows = 2 * (size + 1);
+		cols = (size + 1) * (width +  1) + lineSeparator.length + 1;		
 		this.size = size;
-		this.grid = new char[  rows * cols ];
+		grid = new char[  rows * cols ];
 		
 		
 		for(int i = 0; i < rows -1; i += 2) {
@@ -104,6 +108,17 @@ public class TicTacToeGrid {
 		}		
 	} 
 
+	/**
+	 * Puts a mark in the specified cell.
+	 * @param row Vertical position
+	 * @param col Horizontal position.
+	 * @param mark Character
+	 */
+	public void set(int row, int col, char mark) {
+		int r = 2 * (row + 1);
+		int c = 2 * width+ col * (width+1);
+		grid[r * cols + c] = mark;
+	}
 	@Override
 	public String toString() {
 		return new String(grid);

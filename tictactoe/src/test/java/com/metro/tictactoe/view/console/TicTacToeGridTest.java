@@ -8,12 +8,19 @@ import com.metro.tictactoe.controller.GameController;
 public class TicTacToeGridTest {
 
 	@Test
-	 public void testCreateGrid() throws GameException {
+	 public void testCreateGrid() throws GameException { //Validates that ArrayIndexOutOfBoundsException is thrown by TicTacToeGrid constructor. 
 		 
 		 for(int i = GameController.MIN_SIZE; i < GameController.MAX_SIZE + 1; i++) {
 			 
 			 TicTacToeGrid grid = new TicTacToeGrid(i);
 			 System.out.println();
+			 
+			 for(int j = 0; j < i; j++) {
+				 
+				 for(int k = 0; k < i; k++) {
+					 grid.set(j, k, 'X');
+				 }
+			 }
 			 System.out.println(grid);
 		 } 
 	 }
