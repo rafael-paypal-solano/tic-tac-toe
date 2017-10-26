@@ -15,6 +15,6 @@ public class TicTacToeGridTest {
 			 TicTacToeGrid grid = new TicTacToeGrid(i);
 			 System.out.println();
 			 System.out.println(grid);
-		 }
+		 } 
 	 }
 }
