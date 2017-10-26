@@ -12,12 +12,12 @@ import com.metro.tictactoe.model.Canvas;
 public class GameController {
 
 	/**
-	 * <code>3</code>
+	 * <code>Min grid size.</code>
 	 */
 	public static final int MIN_SIZE=3;
 	
 	/**
-	 * <code>10</code>
+	 * <code>Max grid size</code>
 	 */
 	public static final int MAX_SIZE=10;
 	
