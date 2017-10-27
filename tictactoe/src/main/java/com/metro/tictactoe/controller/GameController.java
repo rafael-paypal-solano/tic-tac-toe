@@ -97,8 +97,12 @@ public class GameController {
 				
 		try {
 			
-			// Use the parallel processing to find winning straight lines.
+			//
+			// Use parallel processing to find winning straight lines.
+			//
+			
 			for(int i = 0; i < canvas.getSize(); i++) {
+				
 				straightLineScanners[i].reset(canvas, i+1);
 				executor.execute(straightLineScanners[i]);
 				straightLineScanners[i].run();
@@ -115,7 +119,9 @@ public class GameController {
 				}
 			}
 			
+			//
 			//TODO: Use sequential processing to find sloped winning lines.
+			//
 			
 		}  catch(RuntimeException e) {
 			throw new GameException(e);

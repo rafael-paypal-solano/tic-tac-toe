@@ -30,18 +30,27 @@ public class GameControlerTest {
 		 * Validates that vertical winning lines can be found.
 		 */
 		
-		for(int size = GameController.MIN_SIZE; size < GameController.MAX_SIZE+1; size++) {
+		for(int size = GameController.MIN_SIZE; size < GameController.MAX_SIZE + 1; size++) {
+			GameController leftDiagonalLineController = new GameController(size);
+			GameController rightDiagonalLineController = new GameController(size);
+			TicTacToeGrid leftDiagonalGrid = new TicTacToeGrid(size);
+			TicTacToeGrid rightDiagonalGrid = new TicTacToeGrid(size);
+			
+			//TODO: Change back to GameController.MAX_SIZE + 1
 			for(int i = 1; i < size + 1; i++) {
 				GameController verticalLinesController = new GameController(size);
 				GameController horizontalLinesController = new GameController(size);
 				TicTacToeGrid verticalGrid = new TicTacToeGrid(size);
 				TicTacToeGrid horizontalGrid = new TicTacToeGrid(size);
 				
-				for(int k = 1; k < size + 1; k++) {
-					
+				leftDiagonalLineController.updateState(new Choice(i, i, player));
+				rightDiagonalLineController.updateState(new Choice(i, size - (i - 1), player));
+				leftDiagonalGrid.set(i, i, player.getGlyph());
+				rightDiagonalGrid.set(i, size - (i - 1), player.getGlyph());				
+				
+				for(int k = 1; k < size + 1; k++) {					
 					verticalLinesController.updateState(new Choice(k, i, player));
-					horizontalLinesController.updateState(new Choice(i, k, player));
-					
+					horizontalLinesController.updateState(new Choice(i, k, player));										
 					verticalGrid.set(k, i, player.getGlyph());
 					horizontalGrid.set(i, k, player.getGlyph());
 				}
@@ -49,6 +58,9 @@ public class GameControlerTest {
 				assertValidStraightLine(verticalLinesController, verticalGrid);
 				assertValidStraightLine(horizontalLinesController, horizontalGrid);
 			}
+			
+			assertValidStraightLine(leftDiagonalLineController, leftDiagonalGrid);
+			assertValidStraightLine(rightDiagonalLineController, rightDiagonalGrid);			
 		}
 	}
 	
@@ -61,7 +73,7 @@ public class GameControlerTest {
 	}
 	
 	 
-	@Test
+	//@Test
 	public void testInvalidStraightLines() throws GameException {
 		Player player1 = new Player('X', "Rafael");
 		Player player2 = new Player('O', "Raul");
@@ -94,4 +106,22 @@ public class GameControlerTest {
 		}
 
 	}	
+	
+	@Test
+	public void testGoodInitialization() throws GameException {
+		for(int i = GameController.MIN_SIZE; i < GameController.MAX_SIZE; i++) {			
+			new GameController(i);
+			System.out.println(String.format("%s.testGoodInitialization --> Created game controler of size %d", getClass().getName(), i));
+		}
+	}
+	
+	@Test(expected = GameException.class)
+	public void testBadInitializationMin() throws GameException {
+		new GameController(GameController.MIN_SIZE-1);
+	}
+	
+	@Test(expected = GameException.class)
+	public void testGoodInitializationMax() throws GameException {
+		new GameController(GameController.MAX_SIZE+1);
+	}		
 }

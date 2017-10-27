@@ -40,17 +40,32 @@ class StraightLineScanner implements Runnable {
 	 *  <p>Implements the scanning process</p>
 	 */
 	public void run() {
-		Player top = canvas.getPlayer(1, i);			
+		int size = canvas.getSize();
+		Player top = canvas.getPlayer(1, i);
+		Player topLeft = canvas.getPlayer(1, 1);		
 		Player left = canvas.getPlayer(i, 1);
+		Player topRight = canvas.getPlayer(1, size);
+		
 		int verticalCount = 0;
 		int horizontalCount = 0;
+		int leftDiagonalCount = 0;
+		int rightDiagonalCount = 0;
 		
-		for(int k = 1; k < canvas.getSize() + 1; k++) {
+		for(int k = 1; k < size + 1; k++) {
+			int j = size - (k - 1);
+			
 			verticalCount += canvas.getPlayer(k, i) != null && canvas.getPlayer(k, i) == top ? 1 : 0;			
 			horizontalCount += canvas.getPlayer(i, k) != null  && canvas.getPlayer(i, k) == left ? 1 : 0;
+			leftDiagonalCount += canvas.getPlayer(k, k) != null &&  canvas.getPlayer(k, k) == topLeft ? 1 : 0;
+			rightDiagonalCount += canvas.getPlayer(j, size - (j - 1)) != null &&  canvas.getPlayer(j, size - (j - 1)) == topRight ? 1 : 0;
 		}
 		
-		complete = verticalCount == canvas.getSize() || horizontalCount == canvas.getSize();
+		complete = (
+			verticalCount == canvas.getSize() ||
+			horizontalCount == canvas.getSize() || 
+			leftDiagonalCount == canvas.getSize() ||
+			rightDiagonalCount == canvas.getSize()
+		);
 	}
 	
 	/**
