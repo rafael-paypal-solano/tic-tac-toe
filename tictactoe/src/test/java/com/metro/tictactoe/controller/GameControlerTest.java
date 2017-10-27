@@ -36,7 +36,6 @@ public class GameControlerTest {
 			TicTacToeGrid leftDiagonalGrid = new TicTacToeGrid(size);
 			TicTacToeGrid rightDiagonalGrid = new TicTacToeGrid(size);
 			
-			//TODO: Change back to GameController.MAX_SIZE + 1
 			for(int i = 1; i < size + 1; i++) {
 				GameController verticalLinesController = new GameController(size);
 				GameController horizontalLinesController = new GameController(size);
@@ -73,7 +72,7 @@ public class GameControlerTest {
 	}
 	
 	 
-	//@Test
+	@Test
 	public void testInvalidStraightLines() throws GameException {
 		Player player1 = new Player('X', "Rafael");
 		Player player2 = new Player('O', "Raul");
@@ -83,26 +82,41 @@ public class GameControlerTest {
 		 */
 		
 		for(int size = GameController.MIN_SIZE; size < GameController.MAX_SIZE+1; size++) {
+			
 			for(int i = 1; i < size + 1; i++) {
 				GameController verticalLinesController = new GameController(size);
 				GameController horizontalLinesController = new GameController(size);
+				GameController leftDiagonalLineController = new GameController(size);
+				GameController rightDiagonalLineController = new GameController(size);
+				
 				TicTacToeGrid verticalGrid = new TicTacToeGrid(size);
 				TicTacToeGrid horizontalGrid = new TicTacToeGrid(size);
+				TicTacToeGrid leftDiagonalGrid = new TicTacToeGrid(size);
+				TicTacToeGrid rightDiagonalGrid = new TicTacToeGrid(size);
 				
 				
 				for(int k = 1; k < size + 1; k++) {
 					Player player = i == k ? player1 : player2; 
-					
+
+					leftDiagonalLineController.updateState(new Choice(k, k, player));
+					rightDiagonalLineController.updateState(new Choice(k, size - (k - 1), player));
 					verticalLinesController.updateState(new Choice(k, i, player));
 					horizontalLinesController.updateState(new Choice(i, k, player));
 					
+					leftDiagonalGrid.set(k, k, player.getGlyph());
+					rightDiagonalGrid.set(k, size - (k - 1), player.getGlyph());									
 					verticalGrid.set(k, i, player.getGlyph());
 					horizontalGrid.set(i, k, player.getGlyph());
+					
 				}
 							
 				assertInvalidStraightLine(verticalLinesController, verticalGrid);
 				assertInvalidStraightLine(horizontalLinesController, horizontalGrid);
+				assertInvalidStraightLine(leftDiagonalLineController, leftDiagonalGrid);
+				assertInvalidStraightLine(rightDiagonalLineController, rightDiagonalGrid);			
+				
 			}
+			
 		}
 
 	}	
