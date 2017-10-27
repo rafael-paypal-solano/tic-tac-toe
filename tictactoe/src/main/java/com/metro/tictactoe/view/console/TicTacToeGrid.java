@@ -1,7 +1,5 @@
 package com.metro.tictactoe.view.console;
 
-import java.util.Arrays;
-
 import com.metro.tictactoe.GameException;
 
 /**
@@ -115,10 +113,11 @@ public class TicTacToeGrid {
 	 * @param mark Character
 	 */
 	public void set(int row, int col, char mark) {
-		int r = 2 * (row + 1);
-		int c = 2 * width+ col * (width+1);
+		int r = 2 * row ;
+		int c = 2 * width+ (col - 1) * (width+1);
 		grid[r * cols + c] = mark;
 	}
+	
 	@Override
 	public String toString() {
 		return new String(grid);

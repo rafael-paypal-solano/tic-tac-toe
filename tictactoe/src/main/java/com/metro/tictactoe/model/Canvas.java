@@ -48,7 +48,7 @@ public class Canvas implements GameState {
 	 * @return The <code>com.metro.tictactoe.model.Player</code> stored in the cell identified by <code>row</code> and <code>col</code>.
 	 */
 	public Player getPlayer(int row, int col) {
-		return players[row * size + col];
+		return players[(row - 1) * size + (col - 1)];
 	}
 	
 	/**
@@ -59,8 +59,13 @@ public class Canvas implements GameState {
 	 * @return <code>true</code> if the cell at (row, col) is empty; if that's the case; if that's the case, the provided reference is stored in the empty cell.
 	 */
 	public boolean setPlayer(int row, int col, Player player) {
-		if(getPlayer(row, col) == null) {
-			players[row * size + col] = player;
+		
+		if(
+			getPlayer(row, col) == null &&
+			isValidCoordinate(row, col)
+		) { 
+			
+			players[(row - 1) * size + (col-1)] = player;
 			count ++;
 			return true;
 		}
@@ -82,6 +87,17 @@ public class Canvas implements GameState {
 	 */
 	public int getSize() {
 		return size;
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	public boolean isValidCoordinate(int row, int col) {
+
+		return (
+			(row > 0 && row < size + 1) &&
+			(col > 0 && col < size + 1)
+		);
 	}
 	
 	

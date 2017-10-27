@@ -82,7 +82,13 @@ public class ConsoleChoiceInput extends ChoiceInput {
 				String[]  coordinates = line.trim().split("\\s*,\\s*");
 				choice = new Choice(Integer.parseInt(coordinates[0]), Integer.parseInt(coordinates[1]), player);
 				
-				if(gameState.getPlayer(choice.getRow(), choice.getCol()) != null) {
+				int row = choice.getRow();
+				int col = choice.getCol();
+				
+				if(
+					gameState.getPlayer(row, col) == null &&
+					gameState.isValidCoordinate(row, col)
+				) {
 					
 					println(String.format(NOTEMPTY_CELL_MSG_TEMPLATE, choice.getRow(), choice.getCol()));
 					

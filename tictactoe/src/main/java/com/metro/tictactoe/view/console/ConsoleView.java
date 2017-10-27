@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import com.metro.tictactoe.GameException;
 import com.metro.tictactoe.controller.GameController;
 import com.metro.tictactoe.input.ChoiceInput;
+import com.metro.tictactoe.model.Choice;
 import com.metro.tictactoe.view.GameView;
 
 /**
@@ -16,9 +17,9 @@ import com.metro.tictactoe.view.GameView;
 public class ConsoleView extends GameView{
 
 	/**
-	 * 
+	 * Tic tac toe grid.
 	 */
-	char grid[];
+	TicTacToeGrid grid;
 
 	/**
 	 * Print writer through which we send current game's state.
@@ -34,15 +35,16 @@ public class ConsoleView extends GameView{
 	 * @throws GameException
 	 */
 	public ConsoleView(ChoiceInput[] inputs, GameController controller, PrintWriter writer) throws GameException {
+		
 		super(inputs, controller);
-		
-		
-		
 	}
 
 	@Override
-	public void displayState() {
+	public void displayState(Choice choice) {
 		
+		grid.set(choice.getRow(), choice.getCol(), choice.getPlayer().getGlyph());
+		writer.println(grid);
+		writer.flush();
 	}
 	
 

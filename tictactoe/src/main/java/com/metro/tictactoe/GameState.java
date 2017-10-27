@@ -29,4 +29,11 @@ public interface GameState {
 	 */
 	public int getSize();
 		
+	/**
+	 * 
+	 * @param row  Cell's vertical coordinate.
+	 * @param col Cell's horizontal coordinate.
+	 * @return <code>true</code> if the <code>row</code> &amp; <code>col</code> coordinates are inside the game grid.
+	 */
+	public boolean isValidCoordinate(int row, int col);
 }

@@ -17,18 +17,13 @@ public abstract class GameView {
 	/**
 	 * This controller manages game logic.
 	 */
-	GameController controller;
+	protected GameController controller;
 	
 	/**
 	 * <p>Each element in this array represent an input stream through which player provide their choices.</p>
 	 * <p>There is one <code>com.metro.tictactoe.input.ChoiceInput</code> instance per player.</p>
 	 */
 	ChoiceInput[] inputs;
-	
-	/**
-	 * Choices collected by <code>getInput()</code> method.
-	 */
-	Choice[] choices;
 	
 	/**
 	 * Current player # [0...choice.length()] 
@@ -48,15 +43,15 @@ public abstract class GameView {
 	
 		this.inputs = inputs;
 		this.controller = controller;
-		this.choices = new Choice[inputs.length];
 	}
 	
 	/**
 	 * <p>It is just a proxy for <code>com.metro.tictactoe.controller.GameController.gameOver()</code>.</p>
 	 * <p>Developers can override this method in order to customize termination logic without subclassing or modifying the game controller.</p>
 	 * @return Returns <code>false</code> when game is over. 
+	 * @throws GameException 
 	 */
-	public boolean gameOver() {		
+	public boolean gameOver() throws GameException {		
 		
 		return controller.gameOver();
 	}
@@ -64,8 +59,9 @@ public abstract class GameView {
 	/**
 	 * <p>Updates the UI view that shows game's state.</p>
 	 * <p>This method is abstract because we didn't want to prescribe a particular rendering interface.</p>
+	 * @param choice Last choice made by players.
 	 */
-	public abstract void  displayState();
+	public abstract void  displayState(Choice choice);
 
 	/**
 	 * Collects input from players.
@@ -74,7 +70,7 @@ public abstract class GameView {
 	 * @throws IOException 
 	 */
 	public Choice  getInput() throws GameException, IOException {
-		current = (current == choices.length ? 0  : current + 1);
+		current = (current == inputs.length ? 0  : current + 1);
 		
 		Choice choice = inputs[current].read();
 		return choice;
@@ -91,7 +87,11 @@ public abstract class GameView {
 			while(! gameOver()) {
 				Choice choice = getInput();
 				
-				displayState();
+				if(controller.updateState(choice)) {
+					
+					displayState(choice);
+				}
+					
 			}
 		} catch(IOException e) {
 			

@@ -79,6 +79,22 @@ public class Choice implements Serializable {
 	public void setCol(int col) {
 		this.col = col;
 	}
+	
+	/**
+	 * 
+	 * @return Player who made the choice.
+	 */
+	public Player getPlayer() {
+		return player;
+	}
+	
+	/**
+	 * 
+	 * @param player Player who made the choice
+	 */
+	public void setPlayer(Player player) {
+		this.player = player;
+	}
 	@Override
 	public String toString() {
 		return "{row:" + row + ", col:" + col + ", player:" + player + "}";

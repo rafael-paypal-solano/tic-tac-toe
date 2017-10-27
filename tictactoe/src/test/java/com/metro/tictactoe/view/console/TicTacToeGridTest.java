@@ -18,7 +18,7 @@ public class TicTacToeGridTest {
 			 for(int j = 0; j < i; j++) {
 				 
 				 for(int k = 0; k < i; k++) {
-					 grid.set(j, k, 'X');
+					 grid.set(j+1, k+1, 'X');
 				 }
 			 }
 			 System.out.println(grid);
