@@ -18,7 +18,7 @@ public class ConsoleChoiceInput extends ChoiceInput {
 	/**
 	 * &quot;What's your choice %s ?&quot;
 	 */
-	private static final String PROMPT_TEMPLATE="What's your choice %s ? ";
+	private static final String PROMPT_TEMPLATE="What's your choice %s (%s)? ";
 	
 	/**
 	 * &quot;Sorry, '%s' is not a valid choice!&quot;
@@ -28,7 +28,7 @@ public class ConsoleChoiceInput extends ChoiceInput {
 	/**
 	 * &quot;The cell at (%d,%d) is not empty.!&quot;
 	 */
-	private static final String NOTEMPTY_CELL_MSG_TEMPLATE="The cell at (%d,%d) is not empty.";
+	private static final String NOTEMPTY_CELL_MSG_TEMPLATE="The cell at (%d,%d) is not empty or out of range.";
 	
 	/**
 	 * <code>java.io.BufferedReader</code> instance pointing to standard input.
@@ -54,10 +54,24 @@ public class ConsoleChoiceInput extends ChoiceInput {
 		this.writer = writer;
 	}
 
+	/**
+	 * Writes a line to this.writer and then flushes
+	 * @param line
+	 */
 	private void println(String line) {
-		writer.println(String.format(PROMPT_TEMPLATE, player.getName()));
+		writer.println(line);
 		writer.flush();		
 	}
+	
+	/**
+	 * Writes a line to this.writer and then flushes
+	 * @param line
+	 */
+	private void print(String line) {
+		writer.println(line);
+		writer.flush();		
+	}
+	
 	
 	/**
 	 * {@inheritDoc}
@@ -71,7 +85,7 @@ public class ConsoleChoiceInput extends ChoiceInput {
 		
 		while(choice == null && line != null) {
 			
-			println(String.format(PROMPT_TEMPLATE, player.getName()));			
+			print(String.format(PROMPT_TEMPLATE, player.getName(), player.getGlyph()));			
 			line = reader.readLine();
 					
 			if(	(line != null) &&
@@ -80,19 +94,21 @@ public class ConsoleChoiceInput extends ChoiceInput {
 			{
 					
 				String[]  coordinates = line.trim().split("\\s*,\\s*");
-				choice = new Choice(Integer.parseInt(coordinates[0]), Integer.parseInt(coordinates[1]), player);
+				int row = Integer.parseInt(coordinates[0]);
+				int col = Integer.parseInt(coordinates[1]);
 				
-				int row = choice.getRow();
-				int col = choice.getCol();
 				
-				if(
-					gameState.getPlayer(row, col) == null &&
-					gameState.isValidCoordinate(row, col)
+				if(!(
+					gameState.isValidCoordinate(row, col) == true && 
+					gameState.getPlayer(row, col) == null
+					)
 				) {
 					
-					println(String.format(NOTEMPTY_CELL_MSG_TEMPLATE, choice.getRow(), choice.getCol()));
-					
+					println(String.format(NOTEMPTY_CELL_MSG_TEMPLATE, row, col));
+					continue;
 				}
+				
+				choice = new Choice(row, col, player);
 			} else {
 				
 				println(BAD_INPUT_MSG_TEMPLATE);

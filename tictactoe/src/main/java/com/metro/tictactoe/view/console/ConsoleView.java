@@ -37,15 +37,40 @@ public class ConsoleView extends GameView{
 	public ConsoleView(ChoiceInput[] inputs, GameController controller, PrintWriter writer) throws GameException {
 		
 		super(inputs, controller);
+		grid = new TicTacToeGrid(controller.getState().getSize());
+		this.writer = writer;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void displayState(Choice choice) {
 		
-		grid.set(choice.getRow(), choice.getCol(), choice.getPlayer().getGlyph());
+		if(choice != null) {
+			grid.set(choice.getRow(), choice.getCol(), choice.getPlayer().getGlyph());
+		}
+		
 		writer.println(grid);
 		writer.flush();
 	}
+
+	/**
+	 * {@inheritDoc}
+	 */	
+	@Override
+	protected void notifyWinner(Choice choice) {
+		writer.println(String.format("We have a winner !!! %s (%s)", choice.getPlayer().getName(), choice.getPlayer().getGlyph()));
+		writer.flush();
+	}
+
+	@Override
+	protected void notifyTied(Choice choice) {
+		writer.println("Tied up game. ):");
+		writer.flush();
+		
+	}
 	
 
+	
 }

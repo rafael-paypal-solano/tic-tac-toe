@@ -37,25 +37,19 @@ public class GameController {
 	 */
 	Canvas canvas;
 	
+	/**
+	 * Set to <code>true</code> if game finishes with a winning selection.
+	 */	
+	boolean winner;
 	
 	/**
 	 * Array of helper threads used by GameController to find straight winning lines.
 	 */
 	StraightLineScanner[] straightLineScanners;
 	
-	/**
-	 *  Executor service used for scanning tasks. 
-	 */
-	ThreadPoolExecutor executor;
 	
-	/**
-	 * 
-	 * @param size
-	 * @throws GameException 
-	 */
-	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public GameController(int  size) throws GameException {
-		executor = new ThreadPoolExecutor(size, size * 2, 1, TimeUnit.MINUTES, new LinkedBlockingQueue(size));
+		
 		if(size < MIN_SIZE || size > MAX_SIZE)
 			throw new GameException(
 				String.format(
@@ -94,8 +88,11 @@ public class GameController {
 	 * @throws GameException 
 	 */	
 	public boolean gameOver() throws GameException {
-				
+		int size = getState().getSize();
+		
 		try {
+			@SuppressWarnings({ "unchecked", "rawtypes" })
+			ThreadPoolExecutor executor = new ThreadPoolExecutor(size, size, 1, TimeUnit.MINUTES, new LinkedBlockingQueue(size));
 			
 			//
 			// Use parallel processing to find winning straight lines.
@@ -105,31 +102,46 @@ public class GameController {
 				
 				straightLineScanners[i].reset(canvas, i+1);
 				executor.execute(straightLineScanners[i]);
-				straightLineScanners[i].run();
 			}
 
 			
-			executor.awaitTermination(0, TimeUnit.SECONDS);
-			
+			executor.shutdown();
+			try {
+			    if (!executor.awaitTermination(800, TimeUnit.MILLISECONDS)) {
+			    	executor.shutdownNow();
+			    } 
+			} catch (InterruptedException e) {
+				executor.shutdownNow();
+			} 
+	        
 			for(int i = 0; i < canvas.getSize(); i++) {
 				
 				if(straightLineScanners[i].isComplete()) {
 					
+					winner = true;
 					return true;
 				}
 			}
 			
-			//
-			//TODO: Use sequential processing to find sloped winning lines.
-			//
-			
+			if(size * size == canvas.getCount()) {				
+				return true;
+			}
+				
 		}  catch(RuntimeException e) {
 			throw new GameException(e);
-		} catch (InterruptedException e) {
-			throw new GameException(e);
-		}
+		} 
 		
 		
 		return false;
 	}
+
+	/**
+	 * 
+	 * @return <code>true</code> if game finishes with a winning selection.
+	 */
+	public boolean isWinner() {
+		return winner;
+	}
+	
+	
 }

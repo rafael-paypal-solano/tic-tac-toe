@@ -18,7 +18,7 @@ public class RandomChoiceInput extends ChoiceInput {
 	/**
 	 * &quot;What's your choice %s ?&quot;
 	 */
-	private static final String PROMPT_TEMPLATE="%s (aka 'the computer') made this random choice : ";
+	private static final String PROMPT_TEMPLATE="%s (aka 'the computer') made this random choice : (%d, %d) ";
 	
 	
 	/**
@@ -42,19 +42,24 @@ public class RandomChoiceInput extends ChoiceInput {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Choice read() throws IOException {
+	public Choice read() throws IOException {		
+		int row = 0;
+		int col = 0;
 		
-		int row = (int)(Math.random() * 100);
-		int col = (int)(Math.random() * 100);
-		
-		writer.println(String.format(PROMPT_TEMPLATE, player.getName()));
-		writer.flush();
-		
-		while(gameState.getPlayer(row, col) == null) {
+		while(true){
 			
-			row = (int)(Math.random() * 100);
-			col = (int)(Math.random() * 100);		
+			row = (int)(Math.random() * 10);
+			col = (int)(Math.random() * 10);
+			
+			if(!gameState.isValidCoordinate(row, col))
+				continue;
+				
+			if(gameState.getPlayer(row, col) == null)
+				break;
 		}
+		
+		writer.println(String.format(PROMPT_TEMPLATE, player.getName(), row, col));
+		writer.flush();
 		
 		Choice choice = new Choice(row, col, player);
 		return choice;		

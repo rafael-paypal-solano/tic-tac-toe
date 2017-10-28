@@ -70,7 +70,7 @@ public abstract class GameView {
 	 * @throws IOException 
 	 */
 	public Choice  getInput() throws GameException, IOException {
-		current = (current == inputs.length ? 0  : current + 1);
+		current = (current == inputs.length - 1 ? 0  : current + 1);
 		
 		Choice choice = inputs[current].read();
 		return choice;
@@ -82,20 +82,42 @@ public abstract class GameView {
 	 * @throws GameException 
 	 */
 	public void start() throws GameException {
+		Choice choice = null;
+		
 		try {
 			
+			displayState(null);
+			
 			while(! gameOver()) {
-				Choice choice = getInput();
+				choice = getInput();
 				
-				if(controller.updateState(choice)) {
-					
+				if(controller.updateState(choice)) {					
 					displayState(choice);
 				}
 					
 			}
+			
+			if(controller.isWinner()) {				
+				notifyWinner(choice);
+			} else {				
+				notifyTied(choice);
+			}
+			
 		} catch(IOException e) {
 			
 			throw new GameException(e);
 		}
 	}
+
+	/**
+	 * Called by <code>this.start</code> when the game finishes with a winning choice.
+	 * @param choice .-
+	 */
+	protected abstract void notifyWinner(Choice choice);
+	
+	/**
+	 * Called by <code>this.start</code> when the game finishes without winner.
+	 * @param choice .-
+	 */
+	protected abstract void notifyTied(Choice choice);	
 }
