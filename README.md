@@ -45,7 +45,7 @@ If every command displays its version info similarly to previous examples, then 
 
 #### Cloning the Sources ####
 
-Open a shell console (Linux) or a command prompt (Windows) and clone the eclipse workspace from github. You don't actually  need
+Open a shell console (Linux) or a command prompt (Windows) and clone the eclipse workspace from github. You don't actually need
 eclipse to build your project because a pom.xml file is provided.
 
 ```
@@ -68,9 +68,19 @@ C:\workspaces\tic-tac-toe\tictactoe>mvn package
 
 ## Playing the Game ###
 
+Two​ users​​ will​​ play​ against​​ each​ other​ and​ against​ the​ computer.​ Who is​ starting​​ is​ random.​
+
+After​ each move,​ the new state​ of​ the​ grid is​ displayed​ and the player​s can enter the next position of their character one after another.
+
+The size of the grid is configurable between 3x3 and 10x10. The symbols (usually **O**, **X** and **+**) are also configurable.
+
 ### Rules ###
 
+The three players take turns marking the spaces in a **n×n** grid. The player who succeeds in placing **n** of his/her marks in a horizontal, vertical, or diagonal row wins the game.
+
 ### Provided Setups ###
+
+Two sample setups are provided in the config folder (namely **config/config-3x3.properties** and **config/config-4x4.properties**). You can either use those setups for quick testing or create your own. 
 
 ### Sample Games ###
 
