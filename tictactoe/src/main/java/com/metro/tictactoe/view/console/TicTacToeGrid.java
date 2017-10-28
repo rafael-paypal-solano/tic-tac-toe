@@ -122,7 +122,7 @@ public class TicTacToeGrid {
 	
 	@Override
 	public String toString() {
-		return new String(grid);
+		return new String(grid, StandardCharsets.US_ASCII);
 	}
 	
 	
