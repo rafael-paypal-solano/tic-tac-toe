@@ -20,7 +20,7 @@ Assessment project for Metro Group.
 ## Getting Started ##
 
 This version of tic-tac-toe is designed for three players (2 humans player + the bot player). The bot player has no sophisticated AI;
-it just randomly selects an empty cells for each move.
+it just randomly selects an empty cells on each move.
 
 ### Requirements ###
 
@@ -99,7 +99,17 @@ The size of the grid is configurable between 3x3 and 10x10. The symbols (usually
 
 ### Rules ###
 
-The three players take turns marking the spaces in a **n×n** grid. The player who succeeds in placing **n** of his/her marks in a horizontal, vertical, or diagonal row wins the game.
+The three players take turns marking the spaces in a **n×n** grid. The player who succeeds in placing **n** of his/her marks in a horizontal, vertical, or diagonal row wins the game. The game stops when a player wins or all cells are filled (tied up game). The messages for each scenario are respectively
+
+```
+We have a winner !!! Human Player ? (?)
+```
+
+and
+
+``` 
+This game is a tied up one (nobody wins).
+```
 
 ### Provided Setups ###
 
@@ -436,9 +446,9 @@ C:\workspaces\tic-tac-toe\tictactoe>
 
 ### Architecture ###
 
-The game code is packaged into four namespaces. Those packages are:
+The game code is packaged into four packages    . Those packages are:
 
 1. **com.metro.tictactoe.controller**: Classes that drive the game logic.
 2. **com.metro.tictactoe.view**: User interface elements that display the playfield and feedback messages.
-4. **com.metro.tictactoe.input**: User interface elements that collect that from players. 
-3. **com.metro.tictactoe.model**: Entity (data) classes used to move across the three aforementioned packages.
+4. **com.metro.tictactoe.input**: User interface elements that collect input from players. 
+3. **com.metro.tictactoe.model**: Entity (data) classes used to move information across the three aforementioned packages.
