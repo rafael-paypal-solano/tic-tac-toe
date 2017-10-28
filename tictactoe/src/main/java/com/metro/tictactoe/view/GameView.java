@@ -41,6 +41,10 @@ public abstract class GameView {
 		GameController controller
 	) throws GameException {
 	
+		current = -1;
+		while(current < 0 || current > 2) {
+			current = (int)(Math.random() * 10);
+		}
 		this.inputs = inputs;
 		this.controller = controller;
 	}
