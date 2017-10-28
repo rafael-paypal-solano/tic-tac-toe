@@ -7,8 +7,11 @@ Assessment project for Metro Group.
   * [Requirements](#requirements)
   * [Building](#building)
     * [The Build Environment](#the-build-environment)
-    * [Cloning the Sources](#cloning-the-Sources)
-    * [Compiling and Packaging](#compiling-and-Packaging)
+    * [Cloning the Sources](#cloning-the-sources)
+    * [Compiling and Packaging](#compiling-and-packaging)
+* [How to Play](#how-to-play)
+  * [Rules](#rules)
+
 ## Getting Started ##
 
 This version of tic-tac-toe is designed for three players (2 humans player + the bot player). The bot player has no sophisticated AI;
@@ -76,7 +79,7 @@ C:\workspaces>cd tic-tac-toe\tictactoe
 C:\workspaces\tic-tac-toe\tictactoe>mvn package
 ```
 
-## Playing the Game ###
+## How to Play ##
 
 Two​ users​​ will​​ play​ against​​ each​ other​ and​ against​ the​ computer.​ Who is​ starting​​ is​ random.​
 
