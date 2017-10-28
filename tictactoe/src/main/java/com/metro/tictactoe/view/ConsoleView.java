@@ -1,4 +1,4 @@
-package com.metro.tictactoe.view.console;
+package com.metro.tictactoe.view;
 
 
 import java.io.PrintWriter;
@@ -6,7 +6,6 @@ import com.metro.tictactoe.GameException;
 import com.metro.tictactoe.controller.GameController;
 import com.metro.tictactoe.input.ChoiceInput;
 import com.metro.tictactoe.model.Choice;
-import com.metro.tictactoe.view.GameView;
 
 /**
  *  <p>This game view displays the game's state into print writer .</p>

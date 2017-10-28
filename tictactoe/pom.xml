@@ -34,7 +34,7 @@
 				<configuration>
 					<archive>
 						<manifest>
-							<mainClass>com.metro.tictactoe.view.console.Main</mainClass>
+							<mainClass>com.metro.tictactoe.view.Main</mainClass>
 						</manifest>
 					</archive>
 				</configuration>

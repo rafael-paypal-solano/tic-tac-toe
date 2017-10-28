@@ -8,7 +8,7 @@ import java.io.PrintWriter;
 import org.junit.Test;
 
 import com.metro.tictactoe.GameException;
-import com.metro.tictactoe.view.console.ConsoleViewFactory;
+import com.metro.tictactoe.view.ConsoleViewFactory;
 
 public class ConsoleViewFactoryTest {
 

@@ -1,4 +1,4 @@
-package com.metro.tictactoe.view.console;
+package com.metro.tictactoe.view;
 
 import java.nio.charset.StandardCharsets;
 

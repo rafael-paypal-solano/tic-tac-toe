@@ -95,7 +95,7 @@ Two​ users​​ will​​ play​ against​​ each​ other​ and​ agai
 
 After​ each move,​ the new state​ of​ the​ grid is​ displayed​ and the player​s can enter the next position of their character one after another.
 
-The size of the grid is configurable between 3x3 and 10x10. The symbols (usually **O**, **X** and **+**) are also configurable.
+The size of the grid is configurable between 3x3 and 10x10. The symbols (usually **O**, **X** and **+**) are also configurable; there are two sample configuration file in the **config** folder.
 
 ### Rules ###
 
@@ -426,3 +426,19 @@ Tied up game. ):
 C:\workspaces\tic-tac-toe\tictactoe>
 ```
 ## Design Considerations ##
+
+### Decisions ###
+
+1. This is not a networked game, therefore the two human players have to interact with the game via the same console.
+2. I neglected graphical UI (GNome, HTML5, Flash, etc) for the sake of ubiquity and, by the same token, the playfield is drawin using ASCII characters ('+' and '-').
+3. The bot player has no sophisticated AI.
+4. JUnit tests only cover some of the top-most classes because the code topology is quite simple.
+
+### Architecture ###
+
+The game code is packaged into four namespaces. Those packages are:
+
+1. **com.metro.tictactoe.controller**: Classes that drive the game logic.
+2. **com.metro.tictactoe.view**: User interface elements that display the playfield and feedback messages.
+4. **com.metro.tictactoe.input**: User interface elements that collect that from players. 
+3. **com.metro.tictactoe.model**: Entity (data) classes used to move across the three aforementioned packages.

@@ -8,7 +8,7 @@ import org.junit.Test;
 import com.metro.tictactoe.GameException;
 import com.metro.tictactoe.model.Choice;
 import com.metro.tictactoe.model.Player;
-import com.metro.tictactoe.view.console.TicTacToeGrid;
+import com.metro.tictactoe.view.TicTacToeGrid;
 
 public class GameControlerTest {
 	
