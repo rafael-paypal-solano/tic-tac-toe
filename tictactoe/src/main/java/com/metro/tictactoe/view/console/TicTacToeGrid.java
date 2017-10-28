@@ -1,5 +1,7 @@
 package com.metro.tictactoe.view.console;
 
+import java.nio.charset.StandardCharsets;
+
 import com.metro.tictactoe.GameException;
 
 /**
@@ -26,7 +28,7 @@ public class TicTacToeGrid {
 	/**
 	 * Text buffer.  
 	 */
-	char grid[];	
+	byte grid[];	
 
 	/**
 	 *  Since this is a square grid, size indicate both rows and columns count.
@@ -45,20 +47,20 @@ public class TicTacToeGrid {
 		if (size < MIN_SIZE || size > MAX_SIZE)
 			throw new GameException("Grid size if out of range.", -1);
 				
-		char[] lineSeparator = System.lineSeparator().toCharArray();
+		byte[] lineSeparator = System.lineSeparator().getBytes(StandardCharsets.US_ASCII);
 		int n = 1;
 		int pos = 2 * width;
 		
 		rows = 2 * (size + 1);
 		cols = (size + 1) * (width +  1) + lineSeparator.length + 1;		
 		this.size = size;
-		grid = new char[  rows * cols ];
+		grid = new byte[  rows * cols ];
 		
 		
 		for(int i = 0; i < rows -1; i += 2) {
 			int j = i + 1;
 			int k;
-			char c = '+';
+			byte c = '+';
 			
 			for(k = 0; k < (cols - (lineSeparator.length + 1)) ; k++) {
 				
@@ -78,12 +80,12 @@ public class TicTacToeGrid {
 						
 				if( n < 10) {
 				
-					grid[i * cols + 1] = (char)(n + 48);
+					grid[i * cols + 1] = (byte)(n + 48);
 					grid[pos] = grid[i * cols + 1];
 				} else {
 					
-					grid[i * cols + 0] = (char)(n/size + 48);
-					grid[i * cols + 1] = (char)(n - (n/size) * 10 + 48);
+					grid[i * cols + 0] = (byte)(n/size + 48);
+					grid[i * cols + 1] = (byte)(n - (n/size) * 10 + 48);
 					
 					grid[pos + 1] = grid[i * cols + 1];
 					grid[pos] = grid[i * cols + 0];
@@ -94,7 +96,7 @@ public class TicTacToeGrid {
 			}
 			
 			grid[i * cols + k] = '|';
-			grid[j * cols + k] = i == rows -2 ? '+' : '|';
+			grid[j * cols + k] = (byte)(i == rows -2 ? '+' : '|');
 			
 			for(int p = 0 ;p < lineSeparator.length; p++ ) {
 				
@@ -115,7 +117,7 @@ public class TicTacToeGrid {
 	public void set(int row, int col, char mark) {
 		int r = 2 * row ;
 		int c = 2 * width+ (col - 1) * (width+1);
-		grid[r * cols + c] = mark;
+		grid[r * cols + c] = (byte)mark;
 	}
 	
 	@Override
