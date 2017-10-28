@@ -11,6 +11,9 @@ Assessment project for Metro Group.
     * [Compiling and Packaging](#compiling-and-packaging)
 * [How to Play](#how-to-play)
   * [Rules](#rules)
+  * [Provided Setups](#provided-setups)
+  * [Sample Games](#sample-games)
+* [Design Considerations](#design-considerations)
 
 ## Getting Started ##
 
