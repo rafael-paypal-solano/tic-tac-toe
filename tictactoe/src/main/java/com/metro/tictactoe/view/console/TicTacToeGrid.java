@@ -47,7 +47,7 @@ public class TicTacToeGrid {
 		if (size < MIN_SIZE || size > MAX_SIZE)
 			throw new GameException("Grid size if out of range.", -1);
 				
-		byte[] lineSeparator = System.lineSeparator().getBytes(StandardCharsets.US_ASCII);
+		byte[] lineSeparator = {'\n'}; // System.lineSeparator().getBytes(StandardCharsets.US_ASCII);
 		int n = 1;
 		int pos = 2 * width;
 		
