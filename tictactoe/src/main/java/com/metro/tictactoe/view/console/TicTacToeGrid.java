@@ -58,18 +58,18 @@ public class TicTacToeGrid {
 		for(int i = 0; i < rows -1; i += 2) {
 			int j = i + 1;
 			int k;
-			char c = i < (rows - 2) ? '┼': '┴';
+			char c = '+';
 			
 			for(k = 0; k < (cols - (lineSeparator.length + 1)) ; k++) {
 				
 				if(k > 0 && k % (width + 1) == 0) {
 					
-					grid[i * cols + k] = '│';
+					grid[i * cols + k] = '|';
 					grid[j * cols + k] = c;
 				}else {
 					
 					grid[i * cols + k] = ' ';
-					grid[j * cols + k] = '─';					
+					grid[j * cols + k] = '-';					
 				}
 			}
 			
@@ -93,8 +93,8 @@ public class TicTacToeGrid {
 				n++;
 			}
 			
-			grid[i * cols + k] = '│';
-			grid[j * cols + k] = i == rows -2 ? '┘' : '┤';
+			grid[i * cols + k] = '|';
+			grid[j * cols + k] = i == rows -2 ? '+' : '|';
 			
 			for(int p = 0 ;p < lineSeparator.length; p++ ) {
 				
