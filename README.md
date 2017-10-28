@@ -14,7 +14,7 @@ it just randomly selects an empty cells for each move.
 
 ### Building ###
 
-#### The Build System ####
+#### The Build Environment ####
 After downloading and installing the JDK and Apache Maven make sure that paths to the relevant java and maven binaries (namely *java*, *javac* and *mvn*) are included in your system's PATH variable. You can check if everything is setup by just typing the following commands as illustrated:
 
 ```
@@ -22,10 +22,14 @@ $ java -version
 java version "1.8.0_144"
 Java(TM) SE Runtime Environment (build 1.8.0_144-b01)
 Java HotSpot(TM) 64-Bit Server VM (build 25.144-b01, mixed mode)
-$
+```
+
+```
 $ javac -version
 javac 1.8.0_144
-$
+```
+
+```
 $ mvn -version
 Apache Maven 3.3.9
 Maven home: /usr/share/maven
