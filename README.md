@@ -3,9 +3,10 @@ Assessment project for Metro Group.
 
 # Table of Contents #
 
-1. [Getting Started](#getting-started)
-  1.1 [Requirements](#requirements)
-
+* [Getting Started](#getting-started)
+  * [Requirements](#requirements)
+  * [Building](#building)
+   * [The Build Environment](#the-build-environment)
 ## Getting Started ##
 
 This version of tic-tac-toe is designed for three players (2 humans player + the bot player). The bot player has no sophisticated AI;
