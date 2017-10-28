@@ -3,8 +3,8 @@ Assessment project for Metro Group.
 
 # Table of Contents #
 
-1. [Getting Started](#getting-started)
-1.1 [Requirements](#requirements)
+* [Getting Started](#getting-started)
+** [Requirements](#requirements)
 
 ## Getting Started ##
 
