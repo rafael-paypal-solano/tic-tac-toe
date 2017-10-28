@@ -13,6 +13,8 @@ Assessment project for Metro Group.
   * [Rules](#rules)
   * [Provided Setups](#provided-setups)
   * [Sample Games](#sample-games)
+    * [Sample Game With a 3x3 setup](#sample-game-with-a-3x3-setup)
+    * [Sample Game With a 4x4 setup](#sample-game-with-a-4x4-setup)
 * [Design Considerations](#design-considerations)
 
 ## Getting Started ##
@@ -31,7 +33,7 @@ it just randomly selects an empty cells for each move.
 
 #### The Build Environment ####
 
-After downloading and installing the JDK and Apache Maven make sure that paths to the relevant java and maven binaries (namely *java*, *javac* and *mvn*) are included in your system's **PATH** variable. You can check if everything is setup by just typing the following commands as illustrated:
+After downloading and installing the JDK, Apache Maven and Git make sure that paths to the relevant java and maven binaries (namely *java*, *javac*, *mvn* and *git*) are included in your system's **PATH** variable. You can check if everything is setup by just typing the following commands as illustrated:
 
 ```
 $ java -version
@@ -53,6 +55,11 @@ Java version: 1.8.0_144, vendor: Oracle Corporation
 Java home: /usr/lib/jvm/java-8-oracle/jre
 Default locale: en_US, platform encoding: UTF-8
 OS name: "linux", version: "4.10.0-33-generic", arch: "amd64", family: "unix"
+```
+
+```
+$ git --version
+git version 2.7.4
 ```
 
 If every command displays its version info similarly to previous examples, then you can proceed to download the sources and build the game.
@@ -194,7 +201,7 @@ We have a winner !!! Human Player 2 (O)
 
 C:\workspaces\tic-tac-toe\tictactoe>
 ```
-#### Sample Game With a 3x3 setup ####
+#### Sample Game With a 4x4 setup ####
 
 This game is a tied up one (nobody wins).
 
