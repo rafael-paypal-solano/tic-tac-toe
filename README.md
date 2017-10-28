@@ -11,6 +11,7 @@ it just randomly selects an empty cells for each move.
 1. Java Development Kit 1.8 (Oracle or IBM).
 2. Apache Maven.
 3. Any Debian based Linux or Windows 8, 10.
+4. Git Client. Any linux distribution provides proper packages for installing git and windows users can download git CLI from *https://git-scm.com/download/win*
 
 ### Building ###
 
@@ -42,8 +43,12 @@ OS name: "linux", version: "4.10.0-33-generic", arch: "amd64", family: "unix"
 
 If every command displays its version info similarly to previous examples, then you can proceed to download the sources and build the game.
 
-#### Downloading the Sources ####
+#### Cloning the Sources ####
 
+Open a shell console (Linux) or a command prompt (Windows) and clone the project repository from github
+
+```
+```
 
 ## Playing the Game ###
 
