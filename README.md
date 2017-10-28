@@ -6,7 +6,9 @@ Assessment project for Metro Group.
 * [Getting Started](#getting-started)
   * [Requirements](#requirements)
   * [Building](#building)
-   * [The Build Environment](#the-build-environment)
+    * [The Build Environment](#the-build-environment)
+    * [Cloning the Sources](#cloning-the-Sources)
+    * [Compiling and Packaging](#compiling-and-Packaging)
 ## Getting Started ##
 
 This version of tic-tac-toe is designed for three players (2 humans player + the bot player). The bot player has no sophisticated AI;
@@ -63,6 +65,8 @@ remote: Total 492 (delta 150), reused 378 (delta 39), pack-reused 0
 Receiving objects: 100% (492/492), 1.49 MiB | 905.00 KiB/s, done.
 Resolving deltas: 100% (150/150), done.
 ```
+
+#### Compiling and Packaging ####
 
 Move to the application subfolder inside the eclipse workspace and build the binaries with maven. Notice that the build process
 may take some extra seconds the 1st time you run it.
