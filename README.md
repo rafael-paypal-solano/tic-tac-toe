@@ -45,9 +45,25 @@ If every command displays its version info similarly to previous examples, then 
 
 #### Cloning the Sources ####
 
-Open a shell console (Linux) or a command prompt (Windows) and clone the project repository from github
+Open a shell console (Linux) or a command prompt (Windows) and clone the eclipse workspace from github. You don't actually  need
+eclipse to build your project because a pom.xml file is provided.
 
 ```
+C:\workspaces>git clone https://github.com/rafael-paypal-solano/tic-tac-toe.git
+Cloning into 'tic-tac-toe'...
+remote: Counting objects: 492, done.
+remote: Compressing objects: 100% (284/284), done.
+remote: Total 492 (delta 150), reused 378 (delta 39), pack-reused 0
+Receiving objects: 100% (492/492), 1.49 MiB | 905.00 KiB/s, done.
+Resolving deltas: 100% (150/150), done.
+```
+
+Move to the application subfolder inside the eclipse workspace and build the binaries with maven. Notice that the build process
+may take some extra seconds the 1st time you run it.
+
+```
+C:\workspaces>cd tic-tac-toe\tictactoe
+C:\workspaces\tic-tac-toe\tictactoe>mvn package
 ```
 
 ## Playing the Game ###
