@@ -84,4 +84,98 @@ Two sample setups are provided in the config folder (namely **config/config-3x3.
 
 ### Sample Games ###
 
+#### Sample Game With a 3x3 setup ####
+
+In this case the Player 2 is the winner.
+
+```
+C:\workspaces\tic-tac-toe\tictactoe>java -jar target\tictactoe-1.0.0.jar config\config-3x3.properties
+    | 1 | 2 | 3 |
+----+---+---+---|
+ 1  |   |   |   |
+----+---+---+---|
+ 2  |   |   |   |
+----+---+---+---|
+ 3  |   |   |   |
+----+---+---+---+
+
+What's your choice Human Player 2 (O)?
+1,1
+    | 1 | 2 | 3 |
+----+---+---+---|
+ 1  | O |   |   |
+----+---+---+---|
+ 2  |   |   |   |
+----+---+---+---|
+ 3  |   |   |   |
+----+---+---+---+
+
+Bot Player (aka 'the computer') made this random choice : (3, 2)
+    | 1 | 2 | 3 |
+----+---+---+---|
+ 1  | O |   |   |
+----+---+---+---|
+ 2  |   |   |   |
+----+---+---+---|
+ 3  |   | X |   |
+----+---+---+---+
+
+What's your choice Human Player 1 (+)?
+2,2
+    | 1 | 2 | 3 |
+----+---+---+---|
+ 1  | O |   |   |
+----+---+---+---|
+ 2  |   | + |   |
+----+---+---+---|
+ 3  |   | X |   |
+----+---+---+---+
+
+What's your choice Human Player 2 (O)?
+1,3
+    | 1 | 2 | 3 |
+----+---+---+---|
+ 1  | O |   | O |
+----+---+---+---|
+ 2  |   | + |   |
+----+---+---+---|
+ 3  |   | X |   |
+----+---+---+---+
+
+Bot Player (aka 'the computer') made this random choice : (2, 1)
+    | 1 | 2 | 3 |
+----+---+---+---|
+ 1  | O |   | O |
+----+---+---+---|
+ 2  | X | + |   |
+----+---+---+---|
+ 3  |   | X |   |
+----+---+---+---+
+
+What's your choice Human Player 1 (+)?
+2,3
+    | 1 | 2 | 3 |
+----+---+---+---|
+ 1  | O |   | O |
+----+---+---+---|
+ 2  | X | + | + |
+----+---+---+---|
+ 3  |   | X |   |
+----+---+---+---+
+
+What's your choice Human Player 2 (O)?
+1,2
+    | 1 | 2 | 3 |
+----+---+---+---|
+ 1  | O | O | O |
+----+---+---+---|
+ 2  | X | + | + |
+----+---+---+---|
+ 3  |   | X |   |
+----+---+---+---+
+
+We have a winner !!! Human Player 2 (O)
+
+C:\workspaces\tic-tac-toe\tictactoe>
+```
 ## Design Considerations ##
